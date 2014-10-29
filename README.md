@@ -1,0 +1,1 @@
+Technical exercise for Online Health by Nathaniel Barnes. Implemented using Ruby. Completed over October 29 - 31, 2014.
