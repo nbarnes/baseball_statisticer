@@ -1,0 +1,4 @@
+Nil playerid, row = {:playerid=>nil, :birthyear=>1972, :namefirst=>"Leonardo", :namelast=>"DeCaprio"}
+Unusual number of data elements in player, pushing row to anomalous rows
+{:playerid=>"paladut01", :birthyear=>nil, :namefirst=>nil, :namelast=>151, nil=>"Uther"}
+matching id found for player {:playerid=>"whitebe01", :birthyear=>1956, :namefirst=>"Barry", :namelast=>"White"}

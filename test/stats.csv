@@ -1,0 +1,11 @@
+playerID,yearID,league,teamID,G,AB,R,H,2B,3B,HR,RBI,SB,CS
+fordha01,2010,AL,NYA,1,,,,,,,,,
+fordha01,2012,NL,CIN,22,1,0,0,0,0,0,0,0,0
+saransu01,2009,NL,STL,105,500,90,190,20,5,19,82,15,2
+saransu01,2010,NL,STL,156,542,89,201,21,3,9,72,4,4
+saransu01,2010,NL,STL,156,542,89,201,21,3,9,72,4,4,4,4,4
+whitebe01,2011,NL,SFG,35,76,2,6,0,0,0,2,0,0
+whitebe01,2011,NL,SFG,29,,,,,,,,,
+whitebe01,,NL,SFG,29,,,,,,,,,
+decaple01,2011,NL,NYN,1,1,0,0,0,0,0,0,0,0
+,2011,NL,NYN,1,1,0,0,0,0,0,0,0,0
