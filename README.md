@@ -1,7 +1,7 @@
 OVERVIEW
 ========
-This is a simple baseball league statistics application, written as a pre-interview
-test for Online Health by Nathaniel Barnes.
+This is a simple baseball league statistics application, written as a
+pre-interview test for Online Health by Nathaniel Barnes.
 
 TECHNOLOGY
 ==========
@@ -19,8 +19,7 @@ main.rb will, as requested in the task defintion, print to stdout A) the most
 improved batting average from 2009 to 2010, for players with at least 200
 at-bats, B) the slugging percentage of all players on the 2008 Oakland A's,
 and C) the AL and NL triple crown winners for 2011 and 2012 (application will
-output '(No winner' if there was no triple crown winner that year).
-
+output 'No winner' if there was no triple crown winner that year).
 
 EXAMPLE: 'ruby main.rb Master-small.csv Batting-07-12.csv'
 
