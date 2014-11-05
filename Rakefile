@@ -1,13 +1,17 @@
 task :default => [:test]
 
-task :test_player_import do
-  ruby 'test/player_data_analyst.rb'
-end
-
-task :test_stats_import do
-  ruby 'test/seasonal_stats_analyst.rb'
+task :test_league do
+  ruby 'test/baseball_league_test.rb'
 end
 
 task :test do
-  ruby 'test/players_with_stats_test.rb'
+  ruby 'test/factory_import_test.rb'
+end
+
+task :test_main do
+  ruby 'main.rb ./test/players.csv ./test/stats.csv'
+end
+
+task :main do
+  ruby 'main.rb ./Master-small.csv ./Batting-07-12.csv'
 end

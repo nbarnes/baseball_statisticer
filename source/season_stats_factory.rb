@@ -14,7 +14,9 @@ class SeasonalStatsFactory
         anomalous_rows.push("Nil playerid, row = #{stat_line}")
       elsif stat_line[:yearid].nil?
         puts "Nil yearid found, stat_line = #{stat_line}, pushing row to anomalous rows" if verbose
-        anomalous_rows.push("Nil playerid, row = #{stat_line}")
+        anomalous_rows.push("Nil yearid, row = #{stat_line}")
+      elsif stat_line[:league] == nil
+        stat_line[:league] = team_to_league(stat_line[:teamid])
       elsif stat_line.size != 14
         puts "Unusual number of data elements in stat_line, pushing row to anomalous rows" if verbose
         anomalous_rows.push("Unusual number of data elements in stat_line, pushing row to anomalous rows")
@@ -29,6 +31,22 @@ class SeasonalStatsFactory
       f.puts(anomalous_rows)
     end
 
+    return stat_lines
+
+  end
+
+
+
+  def team_to_league(team_id)
+  al_teams = ['NYA', 'BOS', 'BAL', 'TBR', 'TOR', 'DET', 'MIN', 'CLE', 'KCA', 'KCR', 'CHA', 'LAA', 'SEA', 'TEX', 'HOU']
+  nl_teams = ['WAS', 'ATL', 'NYN', 'FLA', 'PHI', 'STL', 'PIT', 'CIN', 'CHN', 'MIL', 'LAD', 'SFG', 'ARI', 'COL']
+    case team_id
+      when al_teams.any? {team_id}
+        return "AL"
+      when NL_teams.any? {team_id}
+        return "NL"
+      else puts "Unrecognized teamid in PlayerFactor.team_to_league" if verbose
+    end
   end
 
 end

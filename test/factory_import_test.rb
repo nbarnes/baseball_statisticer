@@ -5,3 +5,4 @@ players = PlayerFactory.import_from_csv_file('test/players.csv', false)
 stat_lines = SeasonalStatsFactory.import_from_csv_file('test/stats.csv', false)
 
 puts "#{players.inspect}"
+puts "#{stat_lines.inspect}"
