@@ -2,9 +2,10 @@ require_relative './player.rb'
 require_relative './stat_line.rb'
 require_relative './player_factory.rb'
 require_relative './season_stats_factory.rb'
+require 'pry'
 
 class BaseballLeague
-  attr_reader :players, :teams
+  attr_reader :players
 
   def initialize
     @players = Array.new
@@ -16,9 +17,11 @@ class BaseballLeague
   end
 
   def add_players_from_csv(file_name, verbose=false)
-    PlayerFactory.import_from_csv_file(file_name, verbose).each do |player_hash|
+    import_results = PlayerFactory.import_from_csv_file(file_name, verbose)
+    import_results[:players].each do |player_hash|
       add_player(Player.new(player_hash))
     end
+    return import_results[:errors]
   end
 
   def has_player_id?(player_id)
@@ -26,26 +29,30 @@ class BaseballLeague
   end
 
   def add_stats_from_csv(file_name, verbose=false)
-    stat_lines = SeasonalStatsFactory.import_from_csv_file(file_name, false)
-    stat_lines = stat_lines.map { |stat_line| StatLine.new(stat_line) }
-    stat_lines.each { |stat_line| add_stat_line(stat_line, verbose) }
+    import_results = SeasonalStatsFactory.import_from_csv_file(file_name, false)
+    errors = []
+    import_results[:stat_lines].each do |stat_hash|
+      error = add_stat_line(stat_hash, verbose)
+      if error != nil
+        errors.push(error)
+      end
+    end
+    return errors
   end
 
-  def add_stat_line(stat_line, verbose=false)
+  def add_stat_line(stat_hash, verbose=false)
+    stat_line = StatLine.new(stat_hash)
     players_matching_id = @players.find_all do |player|
       player.player_id == stat_line.player_id
     end
     if players_matching_id.length > 1
-      puts "Error, multiple players matching id #{stat_line.player_id}" if verbose
+      return {error: "Error, multiple players matching id", stat_hash: stat_hash}
     elsif players_matching_id.empty?
-      puts "No playerid matching #{stat_line.player_id} in BaseballLeague.add_stats_from_csv" if verbose
+      return {error: "No playerid matching #{stat_line.player_id}", stat_hash: stat_hash}
     else
       players_matching_id[0].add_stat_line(stat_line)
+      return nil
     end
-  end
-
-  def dump_players()
-    puts "#{@players}"
   end
 
 end

@@ -4,34 +4,30 @@ class SeasonalStatsFactory
 
   def self.import_from_csv_file(file_name, verbose)
     stat_lines = []
-    anomalous_rows = []
+    errors = []
 
     CSV.foreach(file_name, :headers => true, :header_converters => :symbol, :converters => :all, :skip_blanks => :true) do |row|
       stat_line = row.to_hash
 
       if stat_line[:playerid].nil?
         puts "Nil playerid found, stat_line = #{stat_line}, pushing row to anomalous rows" if verbose
-        anomalous_rows.push("Nil playerid, row = #{stat_line}")
+        errors.push({error: "Nil playerid",row: row})
       elsif stat_line[:yearid].nil?
         puts "Nil yearid found, stat_line = #{stat_line}, pushing row to anomalous rows" if verbose
-        anomalous_rows.push("Nil yearid, row = #{stat_line}")
+        errors.push({error: "Nil yearid", row: row})
       elsif stat_line[:league] == nil
         stat_line[:league] = team_to_league(stat_line[:teamid])
       elsif stat_line.size != 14
         puts "Unusual number of data elements in stat_line, pushing row to anomalous rows" if verbose
-        anomalous_rows.push("Unusual number of data elements in stat_line, pushing row to anomalous rows")
-        anomalous_rows.push("#{stat_line}")
+        errors.push({error: "Unusual number of data elements", row: row})
+
       else
         puts "pushing #{stat_line}" if verbose
         stat_lines.push(stat_line)
       end
     end
 
-    File.open("stats_data_anomalous_rows.txt", "w") do |f|
-      f.puts(anomalous_rows)
-    end
-
-    return stat_lines
+    return {stat_lines: stat_lines, errors: errors}
 
   end
 

@@ -16,7 +16,7 @@ class Player
   end
 
   # NOTE: this returns the FLOAT VALUE of the batting average
-  def batting_average(year = nil, team = nil)
+  def batting_average(year: nil, team: nil)
     hits, at_bats = 0, 0
 
     seasonal_stats.each do |stat_line|
@@ -58,10 +58,6 @@ class Player
 
   def to_s
     "#{@player_id}, #{@first_name} #{@last_name}, #{@birth_year}"
-  end
-
-  def career_stats
-    return ""
   end
 
   # def baseball_card

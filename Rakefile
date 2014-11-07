@@ -1,11 +1,16 @@
 task :default => [:test]
 
-task :test_league do
-  ruby 'test/baseball_league_test.rb'
+task :test do
+  ruby 'test/player_import_test.rb'
+  ruby 'test/stats_import_test.rb'
 end
 
-task :test do
-  ruby 'test/factory_import_test.rb'
+task :test_player_import do
+  ruby 'test/player_import_test.rb'
+end
+
+task :test_stats_import do
+  ruby 'test/stats_import_test.rb'
 end
 
 task :test_main do

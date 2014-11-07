@@ -1,4 +1,5 @@
 # playerID,yearID,league,teamID,G,AB,R,H,2B,3B,HR,RBI,SB,CS
+require 'pry'
 
 class StatLine
   attr_reader :player_id
@@ -30,6 +31,10 @@ class StatLine
     else
       return 0.0
     end
+  end
+
+  def to_s
+
   end
 
 end
